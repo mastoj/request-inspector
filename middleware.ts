@@ -13,7 +13,9 @@ export function middleware(request: NextRequest) {
     (urlParams.size > 0 ? "?" : "") +
     urlParams.toString();
   return NextResponse.rewrite(url, {
-    headers,
+    request: {
+      headers,
+    },
   });
 }
 
