@@ -7,13 +7,14 @@ export function middleware(request: NextRequest) {
   headers.set("host", "no.preview.elkjop.com");
   headers.set("x-forwarded-host", "no.preview.elkjop.com");
   headers.set("tomas", "yolo");
-
-  return NextResponse.rewrite(
-    "https://request-inspector-nine.vercel.app/api/inspect",
-    {
-      headers,
-    }
-  );
+  const urlParams = request.nextUrl.searchParams;
+  const url =
+    "https://request-inspector-nine.vercel.app/api/inspect" +
+    (urlParams.size > 0 ? "?" : "") +
+    urlParams.toString();
+  return NextResponse.rewrite(url, {
+    headers,
+  });
 }
 
 // See "Matching Paths" below to learn more
