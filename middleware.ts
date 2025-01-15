@@ -5,6 +5,8 @@ import { NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const headers = request.headers;
   headers.set("host", "no.preview.elkjop.com");
+  headers.set("x-forwarded-host", "no.preview.elkjop.com");
+  headers.set("tomas", "yolo");
 
   return NextResponse.rewrite(
     "https://request-inspector-nine.vercel.app/api/inspect",
